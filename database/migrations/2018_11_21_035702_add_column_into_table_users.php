@@ -14,7 +14,8 @@ class AddColumnIntoTableUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('username')->unique();
+            $table->string('username')->unique()->after('email');
+            $table->string('session_id')->nullable()->after('password');
         });
     }
 
@@ -26,7 +27,7 @@ class AddColumnIntoTableUsers extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('username');
+            $table->dropColumn(['username', 'session_id']);
         });
     }
 }

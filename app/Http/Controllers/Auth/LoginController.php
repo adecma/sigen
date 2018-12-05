@@ -50,4 +50,18 @@ class LoginController extends Controller
         
         return $field;
     }
+
+    public function authenticate()
+    {
+        if (Auth::attempt([
+            $this->username() => request()->input($this->username()), 
+            'password' => request()->input('password')
+        ])) {
+            $user = Auth::user();
+            $user->session_id = Auth::getSession()->getId();
+            $user->save();
+            
+            return redirect()->intended($this->redirectTo);
+        }
+    }
 }
