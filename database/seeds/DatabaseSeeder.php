@@ -11,6 +11,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(UserSeeder::class);
+        $this->data()->each(function($data) {
+            $this->call($data);
+        });
+    }
+
+    public function data()
+    {
+        $data = [
+            RoleSeeder::class,
+            DaerahSeeder::class,
+            DesaSeeder::class,
+            KelompokSeeder::class,
+            UserSeeder::class,
+            AttachUserToRoleSeeder::class,
+            KategoriGenerusSeeder::class,
+            JenisPersonSeeder::class,
+        ];
+
+        return collect($data);
     }
 }

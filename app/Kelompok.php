@@ -12,4 +12,9 @@ class Kelompok extends Model
     {
         return $this->belongsTo(Desa::class, 'desa_id', 'id');
     }
+
+    public function user()
+    {
+        return $this->morphOne(User::class, 'assign', 'assign_type', 'assign_id', 'id');
+    }
 }
